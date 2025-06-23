@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Nilai;
 
 class User extends Authenticatable
 {
@@ -53,7 +54,7 @@ class User extends Authenticatable
     //Relasi dengan nilai
     public function nilai()
     {
-        return $this->hasMany(\App\Models\Nilai::class);
+        return $this->hasMany(Nilai::class);
     }
 
 
