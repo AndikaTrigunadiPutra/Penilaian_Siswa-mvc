@@ -48,11 +48,23 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+       $rules = [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'role' => ['required', 'in:siswa,guru'],
+    ];
+
+    if ($data['role'] === 'siswa') {
+        $rules['nis'] = ['required'];
+        $rules['kelas'] = ['required'];
+        
+    } elseif ($data['role'] === 'guru') {
+        $rules['no_telepon'] = ['required'];
+        $rules['alamat'] = ['required'];
+    }
+
+    return Validator::make($data, $rules);
     }
 
     /**
@@ -67,6 +79,11 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role'], // tambahkan ini
+            'nis' => $data['nis'] ?? null,
+            'kelas' => $data['kelas'] ?? null,
+            'no_telepon' => $data['no_telepon'] ?? null,
+            'alamat' => $data['alamat'] ?? null,
         ]);
     }
 }
