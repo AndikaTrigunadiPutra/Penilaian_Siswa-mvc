@@ -50,4 +50,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    //Relasi dengan nilai
+    public function nilai()
+    {
+        return $this->hasMany(\App\Models\Nilai::class);
+    }
+
+
 }

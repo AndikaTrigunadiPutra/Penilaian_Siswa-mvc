@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 
-// Default login/logout/register
+// Default Auth (login, logout, register, dll)
 Auth::routes();
 
 // Halaman root → redirect ke login
@@ -13,21 +13,21 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Custom Register (Siswa & Guru)
+//register multiuser
 
-// Form register siswa
 Route::get('/register/siswa', [RegisterController::class, 'showSiswaForm'])->name('register.siswa');
 Route::post('/register/siswa', [RegisterController::class, 'registerSiswa']);
 
-// Form register guru
 Route::get('/register/guru', [RegisterController::class, 'showGuruForm'])->name('register.guru');
 Route::post('/register/guru', [RegisterController::class, 'registerGuru']);
 
-//Setelah Login (Redirect ke Dashboard)
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); // opsional
+//login dashboard
 
-// Dashboard Siswa
-Route::middleware(['auth', 'role:siswa'])->get('/dashboard-siswa', [DashboardController::class, 'siswa'])->name('dashboard.siswa');
+// Default redirect setelah login
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Dashboard Guru
-Route::middleware(['auth', 'role:guru'])->get('/dashboard-guru', [DashboardController::class, 'guru'])->name('dashboard.guru');
+// Group middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard-siswa', [DashboardController::class, 'siswa'])->middleware('role:siswa')->name('dashboard.siswa');
+    Route::get('/dashboard-guru', [DashboardController::class, 'guru'])->middleware('role:guru')->name('dashboard.guru');
+});
