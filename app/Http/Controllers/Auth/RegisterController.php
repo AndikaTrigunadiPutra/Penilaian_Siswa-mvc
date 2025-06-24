@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -58,7 +58,7 @@ class RegisterController extends Controller
     if ($data['role'] === 'siswa') {
         $rules['nis'] = ['required'];
         $rules['kelas'] = ['required'];
-        
+
     } elseif ($data['role'] === 'guru') {
         $rules['no_telepon'] = ['required'];
         $rules['alamat'] = ['required'];
@@ -84,6 +84,8 @@ class RegisterController extends Controller
             'kelas' => $data['kelas'] ?? null,
             'no_telepon' => $data['no_telepon'] ?? null,
             'alamat' => $data['alamat'] ?? null,
+
         ]);
     }
+
 }

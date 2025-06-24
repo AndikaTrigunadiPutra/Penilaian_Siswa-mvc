@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -14,7 +15,64 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <style>
+body {
+    background: linear-gradient(to bottom right, #e7f0fd, #ffffff);
+    min-height: 100vh;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #003e8a;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.btn-primary, .btn-success {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.btn-primary:hover, .btn-success:hover {
+    opacity: 0.9;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.alert-success {
+    border-radius: 12px;
+    background-color: #e7f9ed;
+    color: #257942;
+    border: 1px solid #a3d9a5;
+}
+
+input.form-control, select.form-control {
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+}
+
+    </style>
+
+
 </head>
 <body>
     <div id="app">
