@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MataPelajaran extends Model
 {
-    //relasi dengan nilai
+    use HasFactory;
+
+    protected $fillable = ['nama'];
+
+    // Relasi ke nilai
     public function nilai()
     {
         return $this->hasMany(Nilai::class);
     }
-
 }
