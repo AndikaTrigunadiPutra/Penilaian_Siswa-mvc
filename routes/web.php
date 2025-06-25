@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NilaiSiswaController;
+use App\Http\Controllers\SiswaController;
 
 // Default Auth (login, logout, register, dll)
 Auth::routes();
@@ -30,4 +32,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard-siswa', [DashboardController::class, 'siswa'])->middleware('role:siswa')->name('dashboard.siswa');
     Route::get('/dashboard-guru', [DashboardController::class, 'guru'])->middleware('role:guru')->name('dashboard.guru');
+
+//tampilan nilai siswa
+Route::middleware(['auth', 'role:siswa'])->group(function () {
+    Route::get('/nilai-siswa', [NilaiSiswaController::class, 'index'])->name('nilai.siswa');
+
+//tampilan profile siswa
+
+Route::middleware(['auth', 'role:siswa'])->group(function () {
+    Route::get('/profil-siswa', [SiswaController::class, 'profil'])->name('profil.siswa');
+});
+
+});
+
 });
